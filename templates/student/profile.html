@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card col-md-6 mx-auto border shadow-lg mt-4">
+    <div class="card-header text-center bg-dark text-white fw-bold py-3 text-uppercase tracking-wide">
+        Student Identity Record Card
+    </div>
+    <div class="card-body bg-white p-4">
+        <div class="text-center mb-4">
+            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width: 70px; height: 70px; font-size: 28px; font-weight: bold;">
+                {{ profile.name[0] | upper }}
+            </div>
+            <h4 class="mb-0 fw-bold text-primary">{{ profile.name }}</h4>
+            <span class="badge bg-secondary mt-1">Roll Number: {{ profile.roll_number }}</span>
+        </div>
+        <hr>
+        <div class="row my-2 py-1 border-bottom border-light">
+            <div class="col-5 text-muted fw-bold small">System Email ID:</div>
+            <div class="col-7 text-dark fw-semibold">{{ profile.email }}</div>
+        </div>
+        <div class="row my-2 py-1">
+            <div class="col-5 text-muted fw-bold small">Active Track Semester:</div>
+            <div class="col-7"><span class="badge bg-success px-3 py-1">{{ profile.current_semester }} Tier</span></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

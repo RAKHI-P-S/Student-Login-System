@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card col-md-8 mx-auto border shadow-sm">
+    <div class="card-header bg-success text-white fw-bold">Academic Score Matrix Mark Injection Engine</div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Select Student Target Node</label>
+                <select name="student_id" class="form-select" required>
+                    {% for s in students %}
+                        <option value="{{s.id}}">{{s.name}} [{{s.roll_number}}] - Sem {{s.current_semester}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Categorize Target Semester</label>
+                    <select name="semester" class="form-select">
+                        {% for sem in ['S1','S2','S3','S4','S5','S6','S7','S8'] %}<option value="{{sem}}">{{sem}}</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Subject Curriculum / Course Name</label>
+                    <input type="text" name="subject" class="form-control" placeholder="e.g. CS201 - Data Structures" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Verified Score Metric</label>
+                <input type="number" name="score" class="form-control" min="0" max="100" placeholder="0-100" required>
+            </div>
+            <button type="submit" class="btn btn-success px-4 fw-bold">Inject Checked Record Matrix</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

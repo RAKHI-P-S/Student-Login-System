@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold m-0">Academic Grade Matrix Logs</h4>
+    <form method="GET" action="{{ url_for('student_grade_card') }}" class="d-flex align-items-center">
+        <small class="text-muted fw-bold me-2 text-nowrap">Filter Semester:</small>
+        <select name="semester" class="form-select form-select-sm" onchange="this.form.submit()">
+            {% for sem in ['S1','S2','S3','S4','S5','S6','S7','S8'] %}
+                <option value="{{sem}}" {% if selected_sem == sem %}selected{% endif %}>{{sem}}</option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+<div class="card border rounded p-0">
+    <div class="table-responsive p-0">
+        <table class="table table-hover m-0 align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th class="ps-3">Course Curriculum / Subject Identifier</th>
+                    <th class="text-center">Checked Score Metric</th>
+                    <th class="text-center pe-3">Evaluation Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in marks %}
+                <tr>
+                    <td class="ps-3 fw-bold">{{ m.subject }}</td>
+                    <td class="text-center text-primary fw-semibold">{{ m.score }} / 100</td>
+                    <td class="text-center pe-3">
+                        {% if m.score >= 40 %}
+                            <span class="badge bg-success">Passed</span>
+                        {% else %}
+                            <span class="badge bg-danger">Failed</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="3" class="text-center py-4 text-muted">No recorded grading inputs mapped to this specific semester selection.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

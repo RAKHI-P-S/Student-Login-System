@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card border shadow-sm">
+            <div class="card-header bg-warning text-dark fw-bold">Apply for Leave</div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label small text-muted">Semester</label>
+                        <input type="text" class="form-control bg-light" value="{{ current_sem }}" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small text-muted">Start Date</label>
+                        <input type="date" name="start_date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small text-muted">End Date</label>
+                        <input type="date" name="end_date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small text-muted">Reason</label>
+                        <textarea name="reason" class="form-control" rows="4" placeholder="Explain your reason..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100 fw-bold">Submit Request</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-8">
+        <h5 class="fw-bold text-dark mb-3">Your Leave History</h5>
+        <div class="card border shadow-sm p-0">
+            <table class="table table-striped m-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-3">Semester</th>
+                        <th>Dates</th>
+                        <th>Reason</th>
+                        <th class="pe-3">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for l in leaves %}
+                    <tr>
+                        <td class="ps-3"><span class="badge bg-secondary">{{ l.semester }}</span></td>
+                        <td><small>{{ l.start_date }} to {{ l.end_date }}</small></td>
+                        <td><span class="small text-muted">"{{ l.reason }}"</span></td>
+                        <td class="pe-3">
+                            {% if l.status == 'Pending' %}<span class="badge bg-warning text-dark">Pending</span>
+                            {% elif l.status == 'Approved' %}<span class="badge bg-success">Approved</span>
+                            {% else %}<span class="badge bg-danger">Rejected</span>{% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="4" class="text-center text-muted py-4">No leave requests found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

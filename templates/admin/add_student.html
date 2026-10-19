@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card col-md-8 mx-auto shadow-sm">
+    <div class="card-header bg-primary text-white fw-bold">Add New Student</div>
+    <div class="card-body">
+        <form method="POST">
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Roll Number</label>
+                    <input type="text" name="roll_number" class="form-control" required>
+                </div>
+            </div>
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Current Semester</label>
+                    <select name="semester" class="form-select">
+                        {% for sem in ['S1','S2','S3','S4','S5','S6','S7','S8'] %}<option value="{{sem}}">{{sem}}</option>{% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Account Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary fw-bold px-4">Save Student</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-3 mb-4 border shadow-sm">
+    <form method="POST" class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label class="form-label small text-muted fw-bold">Select Date</label>
+            <input type="date" name="date" class="form-control" value="{{ target_date }}">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label small text-muted fw-bold">Select Semester</label>
+            <select name="semester" class="form-select">
+                {% for sem in ['S1','S2','S3','S4','S5','S6','S7','S8'] %}
+                    <option value="{{sem}}" {% if target_sem == sem %}selected{% endif %}>{{sem}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-dark w-100 fw-bold">Load Class List</button>
+        </div>
+    </form>
+</div>
+
+{% if students %}
+<div class="card border shadow-sm">
+    <div class="card-header bg-dark text-white fw-bold">
+        Attendance Worksheet — Semester: {{ target_sem }} (Date: {{ target_date }})
+    </div>
+    <div class="card-body p-0">
+        <form method="POST">
+            <input type="hidden" name="date" value="{{ target_date }}">
+            <input type="hidden" name="semester" value="{{ target_sem }}">
+            <table class="table m-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-3">Roll Number</th>
+                        <th>Student Name</th>
+                        <th class="pe-3">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in students %}
+                    <tr>
+                        <td class="ps-3"><span class="badge bg-secondary">{{ s.roll_number }}</span></td>
+                        <td><strong>{{ s.name }}</strong></td>
+                        <td class="pe-3">
+                            <input type="radio" name="status_{{s.id}}" value="Present" checked id="p_{{s.id}}">
+                            <label class="text-success fw-bold small me-3" for="p_{{s.id}}">Present</label>
+                            
+                            <input type="radio" name="status_{{s.id}}" value="Absent" id="a_{{s.id}}">
+                            <label class="text-danger fw-bold small" for="a_{{s.id}}">Absent</label>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="p-3 bg-light border-top">
+                <button type="submit" name="save_attendance" class="btn btn-success px-4 fw-bold">Save Attendance</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

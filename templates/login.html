@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height: 75vh;">
+    <div class="col-md-5 col-lg-4">
+        <div class="card p-4 border shadow-sm">
+            <h4 class="fw-bold text-center mb-3">Sign In</h4>
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" name="email" class="form-control" required placeholder="email@example.com">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" required placeholder="Enter password">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Account Type</label>
+                    <select name="role" class="form-select" required>
+                        <option value="student">Student</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h4 class="fw-bold mb-3">Registered Student Roll Directory</h4>
+<div class="table-responsive border rounded p-0">
+    <table class="table table-striped m-0 align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th class="ps-3">ID</th>
+                <th>Roll Number</th>
+                <th>Full Identity Name</th>
+                <th>Email ID</th>
+                <th class="pe-3">Active Semester</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in students %}
+            <tr>
+                <td class="ps-3">{{ s.id }}</td>
+                <td><span class="badge bg-secondary">{{ s.roll_number }}</span></td>
+                <td><strong>{{ s.name }}</strong></td>
+                <td>{{ s.email }}</td>
+                <td class="pe-3"><span class="badge bg-primary">{{ s.current_semester }}</span></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5" class="text-center py-3 text-muted">No records found within active database spaces.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

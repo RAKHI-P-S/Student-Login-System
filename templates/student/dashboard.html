@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="pb-2 mb-3 border-bottom">
+    <h2 class="fw-bold text-dark">Student Portal Home</h2>
+    <p class="text-muted small m-0">View your grades, track daily attendance metrics, and apply for leaves.</p>
+</div>
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="p-3 border rounded text-center shadow-sm">
+            <h6>My Profile</h6>
+            <a href="{{ url_for('student_profile') }}" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 border rounded text-center shadow-sm">
+            <h6>Request Leave</h6>
+            <a href="{{ url_for('student_apply_leave') }}" class="btn btn-sm btn-outline-warning text-dark mt-2">Open Form</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="p-3 border rounded text-center shadow-sm">
+            <h6>Grade Report Cards</h6>
+            <a href="{{ url_for('student_grade_card') }}" class="btn btn-sm btn-outline-success mt-2">View Grades</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
